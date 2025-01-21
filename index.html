@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Čistá hlava | Sober Streak</title>
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --background-color: #CEDEB7;
+            --text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .language-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+
+        .language-btn {
+            background: none;
+            border: 2px solid var(--primary-color);
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            color: var(--primary-color);
+        }
+
+        .language-btn.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .logo {
+            width: 200px;
+            height: 200px;
+            margin: 20px;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .header div {
+            text-align: left;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            font-size: 5em;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .header p {
+            font-size: 1.5em;
+            color: #555;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .content {
+            margin: 10px 0;
+        }
+
+        .contact-form {
+            width: 45%;
+            margin: 0;
+            background: #eee;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            height: fit-content;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .support-section {
+            width: 45%;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            height: fit-content;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: #ddd;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .flex-container {
+                flex-direction: column;
+            }
+            
+            .contact-form,
+            .support-section {
+                width: 100%;
+                margin-top: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switch">
+        <button class="language-btn active" onclick="switchLanguage('sk')">SK</button>
+        <button class="language-btn" onclick="switchLanguage('en')">EN</button>
+    </div>
+
+    <div class="container">
+        <div class="header-container">
+            <div class="header" id="sk-header">
+                <img src="logo.png" alt="Čistá hlava logo" class="logo">
+                <div>
+                    <h1>Čistá hlava</h1>
+                    <p style="font-size: 1.5em; color: #555;">podporná stránka aplikácie</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="sk-content">
+            <div class="flex-container">
+                <div class="contact-form">
+                    <h2>Kontaktný formulár</h2>
+                    <form onsubmit="sendEmail(event)">
+                        <input type="text" id="name-sk" placeholder="Vaše meno" required>
+                        <input type="email" id="email-sk" placeholder="Váš email" required>
+                        <textarea id="message-sk" placeholder="Vaša správa" rows="10" required></textarea>
+                        <button type="submit">Odoslať</button>
+                    </form>
+                </div>
+
+                <div class="support-section">
+                    <h2>Podporte projekt</h2>
+                    <p>Ak sa vám aplikácia páči a chcete podporiť jej ďalší vývoj, môžete tak urobiť pomocou príspevku na môj účet naskenovaním tohto QR kódu.</p>
+                    <div class="qr-code">
+                        <img src="qr-code.png" alt="QR kód pre platbu" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <p style="font-weight: bold; font-size: 1.2em; color: var(--primary-color);">1 EUR</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="en-content" class="hidden">
+            <div class="header-container">
+                <div class="header" id="en-header">
+                    <img src="logo.png" alt="Čistá hlava logo" class="logo">
+                    <div>
+                        <h1>Sober Streak</h1>
+                        <p style="font-size: 1.5em; color: #555;">support page for the app</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="contact-form">
+                    <h2>Contact Form</h2>
+                    <form onsubmit="sendEmail(event)">
+                        <input type="text" id="name-en" placeholder="Your name" required>
+                        <input type="email" id="email-en" placeholder="Your email" required>
+                        <textarea id="message-en" placeholder="Your message" rows="10" required></textarea>
+                        <button type="submit">Send</button>
+                    </form>
+                </div>
+
+                <div class="support-section">
+                    <h2>Support the Project</h2>
+                    <p>If you like the app and want to support its further development, you can do so by making a contribution to my account by scanning this QR code.</p>
+                    <div class="qr-code">
+                        <img src="qr-code.png" alt="Payment QR code" style="width: 100%; height: 100%; object-fit: contain;">
+                    </div>
+                    <p style="font-weight: bold; font-size: 1.2em; color: var(--primary-color);">1 EUR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function switchLanguage(lang) {
+            const skContent = document.getElementById('sk-content');
+            const enContent = document.getElementById('en-content');
+            const skHeader = document.getElementById('sk-header');
+            const enHeader = document.getElementById('en-header');
+            const buttons = document.querySelectorAll('.language-btn');
+
+            if (lang === 'sk') {
+                skContent.classList.remove('hidden');
+                enContent.classList.add('hidden');
+                skHeader.classList.remove('hidden');
+                enHeader.classList.add('hidden');
+                document.documentElement.lang = 'sk';
+            } else {
+                skContent.classList.add('hidden');
+                enContent.classList.remove('hidden');
+                skHeader.classList.add('hidden');
+                enHeader.classList.remove('hidden');
+                document.documentElement.lang = 'en';
+            }
+
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === lang.toUpperCase()) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        function sendEmail(event) {
+            event.preventDefault();
+            const lang = document.documentElement.lang;
+            const nameId = `name-${lang}`;
+            const emailId = `email-${lang}`;
+            const messageId = `message-${lang}`;
+
+            const name = document.getElementById(nameId).value;
+            const email = document.getElementById(emailId).value;
+            const message = document.getElementById(messageId).value;
+
+            const mailtoLink = `mailto:jozef.olsovsky@gmail.com?subject=Cista hlava&body=Meno: ${name}%0D%0AEmail: ${email}%0D%0ASprava: ${message}`;
+            window.location.href = mailtoLink;
+
+            // Reset form
+            event.target.reset();
+        }
+    </script>
+</body>
+</html>
