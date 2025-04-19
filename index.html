@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -85,27 +85,6 @@
             margin: 10px 0;
         }
 
-        .contact-form {
-            width: 45%;
-            margin: 0;
-            background: #eee;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            height: fit-content;
-            display: flex;
-            flex-direction: column;
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
         button {
             background-color: var(--primary-color);
             color: white;
@@ -122,12 +101,12 @@
         }
 
         .support-section {
-            width: 45%;
+            width: 70%;
             padding: 30px;
             background: white;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
-            height: fit-content;
+            margin: 0 auto;
         }
 
         .qr-code {
@@ -141,101 +120,50 @@
             display: none;
         }
 
-        .flex-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-            gap: 20px;
+        .email-container {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-color);
+        }
+
+        .iban-link {
+            color: var(--primary-color);
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        a {
+            color:  #4CAF50;
+            font-weight: bold;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        
+        .copy-message {
+            display: none;
+            color: var(--primary-color);
+            font-weight: bold;
             margin-top: 10px;
+            padding: 5px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
         }
 
         @media (max-width: 768px) {
-            .flex-container {
-                flex-direction: column;
-            }
-            
-            .contact-form,
             .support-section {
-                width: 100%;
-                margin-top: 20px;
+                width: 90%;
             }
         }
     </style>
-</head>
-<body>
-    <div class="language-switch">
-        <button class="language-btn active" onclick="switchLanguage('sk')">SK</button>
-        <button class="language-btn" onclick="switchLanguage('en')">EN</button>
-    </div>
-
-    <div class="container">
-        <div class="header-container">
-            <div class="header" id="sk-header">
-                <img src="logo.png" alt="Čistá hlava logo" class="logo">
-                <div>
-                    <h1>Čistá hlava</h1>
-                    <p style="font-size: 1.5em; color: #555;">podporná stránka aplikácie</p>
-                </div>
-            </div>
-        </div>
-        
-        <div id="sk-content">
-            <div class="flex-container">
-                <div class="contact-form">
-                    <h2>Kontaktný formulár</h2>
-                    <form onsubmit="sendEmail(event)">
-                        <input type="text" id="name-sk" placeholder="Vaše meno" required>
-                        <input type="email" id="email-sk" placeholder="Váš email" required>
-                        <textarea id="message-sk" placeholder="Vaša správa" rows="10" required></textarea>
-                        <button type="submit">Odoslať</button>
-                    </form>
-                </div>
-
-                <div class="support-section">
-                    <h2>Podporte projekt</h2>
-                    <p>Ak sa vám aplikácia páči a chcete podporiť jej ďalší vývoj, môžete tak urobiť pomocou príspevku na môj účet naskenovaním tohto QR kódu.</p>
-                    <div class="qr-code">
-                        <img src="qr-code.png" alt="QR kód pre platbu" style="width: 100%; height: 100%; object-fit: contain;">
-                    </div>
-                    <p style="font-weight: bold; font-size: 1.2em; color: var(--primary-color);">1 EUR</p>
-                </div>
-            </div>
-        </div>
-
-        <div id="en-content" class="hidden">
-            <div class="header-container">
-                <div class="header" id="en-header">
-                    <img src="logo.png" alt="Čistá hlava logo" class="logo">
-                    <div>
-                        <h1>Sober Streak</h1>
-                        <p style="font-size: 1.5em; color: #555;">support page for the app</p>
-                    </div>
-                </div>
-            </div>
-            <div class="flex-container">
-                <div class="contact-form">
-                    <h2>Contact Form</h2>
-                    <form onsubmit="sendEmail(event)">
-                        <input type="text" id="name-en" placeholder="Your name" required>
-                        <input type="email" id="email-en" placeholder="Your email" required>
-                        <textarea id="message-en" placeholder="Your message" rows="10" required></textarea>
-                        <button type="submit">Send</button>
-                    </form>
-                </div>
-
-                <div class="support-section">
-                    <h2>Support the Project</h2>
-                    <p>If you like the app and want to support its further development, you can do so by making a contribution to my account by scanning this QR code.</p>
-                    <div class="qr-code">
-                        <img src="qr-code.png" alt="Payment QR code" style="width: 100%; height: 100%; object-fit: contain;">
-                    </div>
-                    <p style="font-weight: bold; font-size: 1.2em; color: var(--primary-color);">1 EUR</p>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <script>
+        // Inicializácia pri načítaní stránky
+        document.addEventListener('DOMContentLoaded', function() {
+            // Predvolene nastavíme angličtinu
+            switchLanguage('en');
+        });
+
         function switchLanguage(lang) {
             const skContent = document.getElementById('sk-content');
             const enContent = document.getElementById('en-content');
@@ -265,23 +193,74 @@
             });
         }
 
-        function sendEmail(event) {
-            event.preventDefault();
-            const lang = document.documentElement.lang;
-            const nameId = `name-${lang}`;
-            const emailId = `email-${lang}`;
-            const messageId = `message-${lang}`;
-
-            const name = document.getElementById(nameId).value;
-            const email = document.getElementById(emailId).value;
-            const message = document.getElementById(messageId).value;
-
-            const mailtoLink = `mailto:jozef.olsovsky@gmail.com?subject=Cista hlava&body=Meno: ${name}%0D%0AEmail: ${email}%0D%0ASprava: ${message}`;
-            window.location.href = mailtoLink;
-
-            // Reset form
-            event.target.reset();
+        function copyToClipboard(text, messageId) {
+            navigator.clipboard.writeText(text)
+                .then(() => {
+                    const message = document.getElementById(messageId);
+                    message.style.display = 'block';
+                    setTimeout(() => {
+                        message.style.display = 'none';
+                    }, 3000);
+                })
+                .catch(err => {
+                    console.error('Nepodarilo sa skopírovať: ', err);
+                });
         }
     </script>
+</head>
+<body>
+    <div class="language-switch">
+        <button class="language-btn" onclick="switchLanguage('sk')">SK</button>
+        <button class="language-btn active" onclick="switchLanguage('en')">EN</button>
+    </div>
+
+    <div class="container">
+        <div class="header-container">
+            <div class="header hidden" id="sk-header">
+                <img src="logo.png" alt="Čistá hlava logo" class="logo">
+                <div>
+                    <h1>Čistá hlava</h1>
+                    <p style="font-size: 1.5em; color: #555;">podporná stránka aplikácie</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="sk-content" class="hidden">
+            <div class="support-section">
+                <h2>Podporte projekt</h2>
+                <p>Ak sa vám aplikácia páči a chcete podporiť jej ďalší vývoj, môžete tak urobiť pomocou príspevku na môj účet:</p>
+                <p><span class="iban-link" onclick="copyToClipboard('SK70 8360 5207 0042 0356 6176', 'copy-message-sk')">SK70 8360 5207 0042 0356 6176</span></p>
+                <p id="copy-message-sk" class="copy-message">IBAN bol skopírovaný do schránky, môžete ho vložiť vo vašom internet bankingu. Ďakujem!</p>
+                <div class="qr-code">
+                    <img src="qr-code.png" alt="QR kód pre platbu" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+
+        <div id="en-content">
+            <div class="header-container">
+                <div class="header" id="en-header">
+                    <img src="logo.png" alt="Čistá hlava logo" class="logo">
+                    <div>
+                        <h1>Sober Streak</h1>
+                        <p style="font-size: 1.5em; color: #555;">support page for the app</p>
+                    </div>
+                </div>
+            </div>
+            <div class="support-section">
+                <h2>Support the Project</h2>
+                <p>If you like the app and want to support its further development, you can do so by making a contribution to my account:</p>
+                <p><span class="iban-link" onclick="copyToClipboard('SK70 8360 5207 0042 0356 6176', 'copy-message-en')">SK70 8360 5207 0042 0356 6176</span></p>
+                <p id="copy-message-en" class="copy-message">IBAN has been copied to clipboard, you can paste it in your internet banking. Thank you!</p>
+                <div class="qr-code">
+                    <img src="qr-code.png" alt="Payment QR code" style="width: 100%; height: 100%; object-fit: contain;">
+                </div>
+            </div>
+        </div>
+        
+        <div class="email-container">
+            <p>Email: <a href="mailto:jozef.olsovsky@gmail.com">jozef.olsovsky@gmail.com</a></p>
+        </div>
+    </div>
 </body>
 </html>
