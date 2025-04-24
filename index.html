@@ -46,12 +46,21 @@
             margin: 0 auto;
             padding: 20px;
             text-align: center;
+            align-items: center;
         }
 
         .logo {
-            width: 200px;
-            height: 200px;
-            margin: 20px;
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 30px;
+            margin-top: 40px;
         }
 
         .header {
@@ -59,8 +68,8 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 5px;
             text-align: center;
+            max-width: 70%;
         }
 
         .header div {
@@ -101,36 +110,16 @@
         }
 
         .support-section {
-            width: 70%;
-            padding: 30px;
-            background: white;
+            width: 100%;
+            padding: 10px;
+            background: #eee;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
             margin: 0 auto;
         }
 
-        .qr-code {
-            width: 200px;
-            height: 200px;
-            margin: 20px auto;
-            background: #ddd;
-        }
-
         .hidden {
             display: none;
-        }
-
-        .email-container {
-            margin-top: 40px;
-            text-align: center;
-            color: var(--text-color);
-        }
-
-        .iban-link {
-            color: var(--primary-color);
-            font-weight: bold;
-            text-decoration: underline;
-            cursor: pointer;
         }
 
         a {
@@ -138,16 +127,6 @@
             font-weight: bold;
             text-decoration: underline;
             cursor: pointer;
-        }
-        
-        .copy-message {
-            display: none;
-            color: var(--primary-color);
-            font-weight: bold;
-            margin-top: 10px;
-            padding: 5px;
-            background-color: #f0f0f0;
-            border-radius: 5px;
         }
 
         @media (max-width: 768px) {
@@ -193,19 +172,7 @@
             });
         }
 
-        function copyToClipboard(text, messageId) {
-            navigator.clipboard.writeText(text)
-                .then(() => {
-                    const message = document.getElementById(messageId);
-                    message.style.display = 'block';
-                    setTimeout(() => {
-                        message.style.display = 'none';
-                    }, 3000);
-                })
-                .catch(err => {
-                    console.error('Nepodarilo sa skopírovať: ', err);
-                });
-        }
+       
     </script>
 </head>
 <body>
@@ -215,52 +182,42 @@
     </div>
 
     <div class="container">
-        <div class="header-container">
-            <div class="header hidden" id="sk-header">
-                <img src="logo.png" alt="Čistá hlava logo" class="logo">
-                <div>
-                    <h1>Čistá hlava</h1>
-                    <p style="font-size: 1.5em; color: #555;">podporná stránka aplikácie</p>
+
+        <div id="sk-content" class="hidden">
+            <div class="header-container">
+                <div class="header hidden" id="sk-header">
+                    <img src="logo.png" alt="Čistá hlava logo" class="logo">
+                    <div>
+                        <h1>Čistá hlava</h1>
+                        <p style="font-size: 1.5em; color: #555;">podporná stránka aplikácie</p>
+                    </div>
                 </div>
             </div>
-        </div>
         
-        <div id="sk-content" class="hidden">
             <div class="support-section">
-                <h2>Podporte projekt</h2>
-                <p>Ak sa vám aplikácia páči a chcete podporiť jej ďalší vývoj, môžete tak urobiť pomocou príspevku na môj účet:</p>
-                <p><span class="iban-link" onclick="copyToClipboard('SK70 8360 5207 0042 0356 6176', 'copy-message-sk')">SK70 8360 5207 0042 0356 6176</span></p>
-                <p id="copy-message-sk" class="copy-message">IBAN bol skopírovaný do schránky, môžete ho vložiť vo vašom internet bankingu. Ďakujem!</p>
-                <div class="qr-code">
-                    <img src="qr-code.png" alt="QR kód pre platbu" style="width: 100%; height: 100%; object-fit: contain;">
-                </div>
+                <p>Pre nahlásenie chýb, prípadne iných pripomienok, ma prosím kontaktujte na:</p>
+                <p><a href="mailto:jozef.olsovsky@gmail.com">jozef.olsovsky@gmail.com</a></p>
             </div>
         </div>
 
         <div id="en-content">
             <div class="header-container">
                 <div class="header" id="en-header">
-                    <img src="logo.png" alt="Čistá hlava logo" class="logo">
+                    <img src="logo.png" alt="Sober Streak logo" class="logo">
                     <div>
                         <h1>Sober Streak</h1>
                         <p style="font-size: 1.5em; color: #555;">support page for the app</p>
                     </div>
                 </div>
             </div>
+
             <div class="support-section">
-                <h2>Support the Project</h2>
-                <p>If you like the app and want to support its further development, you can do so by making a contribution to my account:</p>
-                <p><span class="iban-link" onclick="copyToClipboard('SK70 8360 5207 0042 0356 6176', 'copy-message-en')">SK70 8360 5207 0042 0356 6176</span></p>
-                <p id="copy-message-en" class="copy-message">IBAN has been copied to clipboard, you can paste it in your internet banking. Thank you!</p>
-                <div class="qr-code">
-                    <img src="qr-code.png" alt="Payment QR code" style="width: 100%; height: 100%; object-fit: contain;">
-                </div>
+                <p>For any issues or suggestions, don’t hesitate to reach out at:</p>
+                <p><a href="mailto:jozef.olsovsky@gmail.com">jozef.olsovsky@gmail.com</a></p>
             </div>
         </div>
-        
-        <div class="email-container">
-            <p>Email: <a href="mailto:jozef.olsovsky@gmail.com">jozef.olsovsky@gmail.com</a></p>
-        </div>
+
     </div>
+
 </body>
 </html>
